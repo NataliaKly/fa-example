@@ -1,0 +1,29 @@
+@import "../../../assets/styles/common/shared";
+
+.fa-action-panel {
+    &__container {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        height: 64px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: @color-violet-dark;
+    }
+
+    &__icon {
+        color: @color-white;
+        cursor: pointer;
+        font-size: 24px;
+
+        &:hover {
+            color: @color-violet-light;
+        }
+    }
+
+    &__edit {
+        margin-left: auto;
+    }
+}

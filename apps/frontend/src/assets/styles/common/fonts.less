@@ -1,0 +1,33 @@
+@font-family: Arial, sans-serif;
+
+.font-face(@file-name, @font-family, @font-weight: 400, @font-style: normal) {
+    @font-face {
+        font-family: "@{font-family}";
+        src: url("../../fonts/@{file-name}.woff") format('woff');
+        font-weight: @font-weight;
+        font-style: @font-style;
+        font-display: swap;
+    }
+}
+
+.font-face(BellotaText-Bold, 'Bellota Text', 700);
+.font-face(BellotaText-Light, 'Bellota Text', 300);
+.font-face(BellotaText-Regular, 'Bellota Text', 400);
+
+.font-bold() {
+    font-family: 'Bellota Text', @font-family;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.font-light() {
+    font-family: 'Bellota Text', @font-family;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.font-regular() {
+    font-family: 'Bellota Text', @font-family;
+    font-weight: 400;
+    font-style: normal;
+}

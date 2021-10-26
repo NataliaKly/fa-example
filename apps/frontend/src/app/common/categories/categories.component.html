@@ -1,0 +1,33 @@
+<fa-title [title]="'Categories'" [mode]="mode"></fa-title>
+
+<div class="fa-categories__container" [formGroup]="formGroup">
+    <mat-spinner *ngIf="loading" [ngClass]="'fa-loader'" [diameter]="60"></mat-spinner>
+    <ng-container *ngIf="!loading">
+        <div *ngIf="formArray.value.length" class="fa-categories__form" formArrayName="items">
+            <div *ngFor="let control of formArray.controls; let i = index" class="fa-categories__form-row">
+                <ng-container [formGroupName]="i">
+                    <mat-form-field class="fa-categories__form-item" appearance="outline" floatLabel="always">
+                        <mat-label>Title</mat-label>
+                        <input type="text" matInput [formControlName]="'title'" placeholder="Title" />
+                        <mat-error *ngIf="control.controls.title.hasError('required')">
+                            Title is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </ng-container>
+            </div>
+        </div>
+        <div class="fa-categories__form-controls">
+            <button
+                mat-flat-button
+                color="primary"
+                class="fa-categories__form-button"
+                [disabled]="formGroup.invalid"
+                (click)="addControl()"
+            >
+                Add Control
+            </button>
+            <button mat-flat-button color="primary" class="fa-categories__form-button" (click)="save()">Save</button>
+        </div>
+    </ng-container>
+</div>
+<fa-action-panel [mode]="mode" (actionClick)="doAction($event)"></fa-action-panel>

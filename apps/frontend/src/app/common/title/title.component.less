@@ -1,0 +1,42 @@
+@import "../../../assets/styles/common/shared";
+
+.fa-title {
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 24px 10px 0;
+        padding-bottom: 16px;
+        font-size: 32px;
+        line-height: 40px;
+        color: @color-violet-dark;
+        border-bottom: 1px solid @color-violet-light;
+    }
+
+    &__icon {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+
+        color: @color-violet-dark;
+
+        &._control {
+            cursor: pointer;
+
+            &:hover {
+                color: @color-violet-middle;
+                & .mat-datepicker-toggle {
+                    color: @color-violet-middle;
+                }
+            }
+
+            & .mat-datepicker-toggle {
+                color: @color-violet-dark;
+            }
+        }
+    }
+}

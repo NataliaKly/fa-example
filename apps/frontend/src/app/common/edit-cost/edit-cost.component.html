@@ -1,0 +1,43 @@
+<fa-title [title]="'Edit cost'"></fa-title>
+<div class="fa-edit-cost__container">
+    <mat-spinner *ngIf="loading" [ngClass]="'fa-loader'" [diameter]="60"></mat-spinner>
+    <ng-container *ngIf="!loading">
+        <div class="fa-edit-cost__form" [formGroup]="formGroup">
+            <mat-form-field class="fa-edit-cost__form-item" appearance="outline" floatLabel="always">
+                <mat-label>Title</mat-label>
+                <input type="text" matInput [formControlName]="'title'" placeholder="Title" />
+                <mat-error *ngIf="formGroup.controls.title.hasError('required')">
+                    Title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="fa-edit-cost__form-item" appearance="outline" floatLabel="always">
+                <mat-label>Amount</mat-label>
+                <input type="number" matInput [formControlName]="'amount'" placeholder="0" />
+                <mat-error *ngIf="formGroup.controls.title.hasError('required')">
+                    Amount is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="formGroup.controls.amount.hasError('min')"> Amount should be more than 0 </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always">
+                <mat-label>Category</mat-label>
+                <mat-select [formControlName]="'categoryId'">
+                    <mat-option *ngFor="let category of categories; trackBy: trackByFn" [value]="category.id">
+                        {{ category.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="fa-edit-cost__form-controls">
+            <button
+                mat-flat-button
+                color="primary"
+                class="fa-edit-cost__form-button"
+                [disabled]="formGroup.invalid"
+                (click)="save()"
+            >
+                Save
+            </button>
+        </div>
+    </ng-container>
+</div>
+<fa-action-panel [mode]="mode" (actionClick)="doAction($event)"></fa-action-panel>

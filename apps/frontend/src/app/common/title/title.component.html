@@ -1,0 +1,36 @@
+<div class="fa-title__container">
+    <ng-container [ngSwitch]="mode">
+        <ng-container *ngSwitchCase="viewMode.CALENDAR">
+            <div class="fa-title__icon">
+                <button mat-mini-fab color="primary" aria-label="Edit">
+                    <mat-icon [ngClass]="'fa-title__icon'" (click)="onArrowClick(actions.BACK)">arrow_back</mat-icon>
+                </button>
+            </div>
+            <div class="fa-title__title _control" (click)="datepicker.open()">
+                {{ title }}
+                <input matInput [hidden]="true" [matDatepicker]="datepicker" />
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker
+                    #datepicker
+                    touchUi
+                    startView="multi-year"
+                    (monthSelected)="changeMonth($event)"
+                    panelClass="example-month-picker"
+                >
+                </mat-datepicker>
+            </div>
+
+            <div class="fa-title__icon">
+                <button mat-mini-fab color="primary" aria-label="Edit">
+                    <mat-icon [ngClass]="'fa-title__icon'" (click)="onArrowClick(actions.NEXT)">arrow_forward</mat-icon>
+                </button>
+            </div>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+            <div class="fa-title__title">
+                {{ title }}
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

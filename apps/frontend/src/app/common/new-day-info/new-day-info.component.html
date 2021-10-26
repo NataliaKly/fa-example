@@ -1,0 +1,53 @@
+<fa-title [title]="dateString" [icon]="'calendar_today'" (iconClick)="backToCalendar()"></fa-title>
+<div class="fa-day-info__container">
+    <mat-spinner *ngIf="loading" [ngClass]="'fa-loader'" [diameter]="60"></mat-spinner>
+    <ng-container *ngIf="!loading">
+        <div [formGroup]="formGroup">
+            <div *ngIf="formArray.value.length" class="fa-day-info__form" formArrayName="items">
+                <div *ngFor="let control of formArray.controls; let i = index" class="fa-day-info__form-row">
+                    <ng-container [formGroupName]="i">
+                        <mat-form-field class="fa-day-info__form-item" appearance="outline" floatLabel="always">
+                            <mat-label>Title</mat-label>
+                            <input type="text" matInput [formControlName]="'title'" placeholder="Title" />
+                            <mat-error *ngIf="control.controls.title.hasError('required')">
+                                Title is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="fa-day-info__form-item" appearance="outline" floatLabel="always">
+                            <mat-label>Amount</mat-label>
+                            <input type="number" matInput [formControlName]="'amount'" placeholder="0" />
+                            <mat-error *ngIf="control.controls.title.hasError('required')">
+                                Amount is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="control.controls.amount.hasError('min')">
+                                Amount should be more than 0
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Category</mat-label>
+                            <mat-select [formControlName]="'category'">
+                                <mat-option *ngFor="let category of categories" [value]="category">
+                                    {{ category.title }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="fa-day-info__form-controls">
+            <button mat-flat-button color="primary" class="fa-day-info__form-button" (click)="addControl()">
+                Add Control
+            </button>
+            <button
+                mat-flat-button
+                color="primary"
+                class="fa-day-info__form-button"
+                [disabled]="formGroup.invalid"
+                (click)="save()"
+            >
+                Save
+            </button>
+        </div>
+    </ng-container>
+</div>

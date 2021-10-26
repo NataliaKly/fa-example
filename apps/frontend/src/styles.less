@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+//normalize
+@import "assets/styles/common/normalize.css";
+
+//common
+@import "assets/styles/common/shared";
+
+//
+////components
+@import "assets/styles/components/icon";
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-typography {
+    .font-regular();
+}
+
+.fa-action-panel:before {
+    content: "";
+    display: block;
+    height: 64px;
+    width: 100%;
+}

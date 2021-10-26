@@ -1,0 +1,38 @@
+<fa-title [title]="dateString"></fa-title>
+<div class="fa-day-info__container">
+    <mat-spinner *ngIf="loading" [ngClass]="'fa-loader'" [diameter]="60"></mat-spinner>
+    <ng-container *ngIf="!loading">
+        <ng-container *ngIf="costs.length; else noItemsTemplate">
+            <div class="fa-day-info__list">
+                <ng-container *ngFor="let group of groupedCosts">
+                    <div class="fa-day-info__group">
+                        <div class="fa-day-info__group-name">
+                            {{ group.title }}
+                        </div>
+                        <div class="fa-day-info__group-price">
+                            {{ group.total }}
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let item of group.costs; trackBy: trackByFn">
+                        <div
+                            class="fa-day-info__item"
+                            [class._selected]="selectedCost?.id === item.id"
+                            (click)="selectCost(item)"
+                        >
+                            <div class="fa-day-info__item-title">{{ item.title }}</div>
+                            <div class="fa-day-info__item-amount">{{ item.amount }}</div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>
+<fa-action-panel [mode]="mode" [controlsHidden]="!selectedCost" (actionClick)="doAction($event)"></fa-action-panel>
+
+<ng-template #noItemsTemplate>
+    <div class="fa-day-info__no-items">
+        <div class="fa-day-info__no-items-title">No info for this day</div>
+        <a [routerLink]="'add-info'" mat-flat-button color="primary">Add Info</a>
+    </div>
+</ng-template>

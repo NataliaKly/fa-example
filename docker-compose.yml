@@ -1,0 +1,11 @@
+version: "3"
+services:
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_DB=fa-example
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=0000
+    ports:
+      - 5432:5432

@@ -1,0 +1,75 @@
+@import "../../../assets/styles/common/shared";
+
+.fa-calendar {
+    &__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        gap: 10px 10px;
+        margin: 0 10px;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 40px;
+        font-size: 24px;
+        border: 1px solid @color-violet-dark;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        color: @color-white;
+        background-color: @color-violet-dark;
+
+        @media @mobile-s {
+            font-size: 20px;
+        }
+
+        &._current {
+            position: relative;
+
+            &:before {
+                content: "";
+                display: block;
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                position: absolute;
+                z-index: 0;
+                border: 3px solid #f70072;
+                border-radius: 8px;
+            }
+        }
+
+        &._empty {
+            color: @color-violet-middle;
+            border-color: @color-violet-light;
+            background-color: @color-white;
+        }
+
+        &._title {
+            font-size: 20px;
+            color: @color-violet-dark;
+            background-color: @color-white;
+            border-color: transparent;
+            align-self: flex-end;
+            line-height: 24px;
+
+            @media @not-mobile {
+                font-size: 20px;
+            }
+
+            @media @mobile {
+                font-size: 16px;
+            }
+
+            @media @mobile-s {
+                font-size: 14px;
+            }
+        }
+    }
+
+    &__loader {
+        line-height: 40px;
+    }
+}

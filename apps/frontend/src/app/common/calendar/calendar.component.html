@@ -1,0 +1,18 @@
+<fa-title [title]="month" [mode]="mode" (arrowClick)="doAction($event)" (selectDate)="selectDate($event)"></fa-title>
+<mat-spinner *ngIf="!calendar" [ngClass]="'fa-loader'" [diameter]="60"></mat-spinner>
+<ng-container *ngIf="calendar">
+    <div *ngIf="calendar" class="fa-calendar__container">
+        <div *ngFor="let title of daysTitles" class="fa-calendar__item _title">{{ title }}</div>
+        <ng-container *ngFor="let item of calendar.days; trackBy: trackByFn">
+            <a
+                [routerLink]="['/', calendar.month, item.day]"
+                class="fa-calendar__item"
+                [class._empty]="!item.costs.length"
+                [class._current]="isToday(item.day)"
+            >
+                {{ item.day }}
+            </a>
+        </ng-container>
+    </div>
+    <fa-action-panel [mode]="mode" (actionClick)="doAction($event)"></fa-action-panel>
+</ng-container>
