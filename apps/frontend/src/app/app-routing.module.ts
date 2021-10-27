@@ -9,9 +9,9 @@ import { CategoriesComponent } from "./common/categories/categories.component";
 const routes: Routes = [
   { path: "categories", component: CategoriesComponent },
   { path: "cost/:id", component: EditCostComponent },
-  { path: ":month", component: CalendarComponent },
-  { path: ":month/:day", component: DayInfoComponent },
-  { path: ":month/:day/add-info", component: NewDayInfoComponent },
+  { path: ":year/:month", component: CalendarComponent },
+  { path: ":year/:month/:day", component: DayInfoComponent },
+  { path: ":year/:month/:day/add-info", component: NewDayInfoComponent },
   { path: "", component: CalendarComponent, pathMatch: "full" }
 ];
 @NgModule({

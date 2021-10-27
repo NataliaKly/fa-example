@@ -77,7 +77,7 @@ export class EditCostComponent implements OnInit {
       })
       .subscribe(() => {
         const momentDate = moment(this.formGroup.value.date);
-        this.router.navigate(["/", momentDate.format("MMMM"), momentDate.format("D")]);
+        this.router.navigate(["/", momentDate.format("YYYY"), momentDate.format("MMMM"), momentDate.format("D")]);
       });
   }
 
@@ -85,7 +85,7 @@ export class EditCostComponent implements OnInit {
     switch (action) {
       case this.actions.CALENDAR:
         const momentDate = moment(this.formGroup.value.date);
-        this.router.navigate(["/", momentDate.format("MMMM")]);
+        this.router.navigate(["/", momentDate.format("YYYY"), momentDate.format("MMMM")]);
         break;
     }
   }

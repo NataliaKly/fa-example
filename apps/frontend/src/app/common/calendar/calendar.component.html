@@ -3,9 +3,11 @@
 <ng-container *ngIf="calendar">
     <div *ngIf="calendar" class="fa-calendar__container">
         <div *ngFor="let title of daysTitles" class="fa-calendar__item _title">{{ title }}</div>
-        <ng-container *ngFor="let item of calendar.days; trackBy: trackByFn">
+        <ng-container *ngFor="let item of calendarCards; trackBy: trackByFn">
+            <div *ngIf="!item.day" class="fa-calendar__item _disabled"></div>
             <a
-                [routerLink]="['/', calendar.month, item.day]"
+                *ngIf="item.day"
+                [routerLink]="['/', calendar.year, calendar.month, item.day]"
                 class="fa-calendar__item"
                 [class._empty]="!item.costs.length"
                 [class._current]="isToday(item.day)"

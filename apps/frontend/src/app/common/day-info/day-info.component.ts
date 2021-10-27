@@ -20,6 +20,7 @@ export class DayInfoComponent implements OnInit {
   public costs: CostDto[] = [];
   public groupedCosts: any;
   public month: string = "";
+  public year: string = "";
   public day: string = "";
   public date: moment.Moment = moment();
   public loading: boolean = false;
@@ -48,8 +49,9 @@ export class DayInfoComponent implements OnInit {
     });
     this.route.params.subscribe(params => {
       this.month = params?.month;
+      this.year = params.year;
       this.day = params?.day;
-      this.date = moment(this.month + "-" + this.day, "MMMM-D");
+      this.date = moment(this.year + "-" + this.month + "-" + this.day, "YYYY-MMMM-D");
       this.calendarService.getDayInfo(this.date.format("MM-DD-YYYY")).subscribe((costs: CostDto[]) => {
         this.loading = false;
         this.costs = costs;
@@ -96,7 +98,7 @@ export class DayInfoComponent implements OnInit {
   public doAction(action: string): void {
     switch (action) {
       case this.actions.CALENDAR:
-        this.router.navigate(["/", this.month]);
+        this.router.navigate(["/", this.year, this.month]);
         break;
       case this.actions.EDIT:
         this.router.navigate(["/cost", this.selectedCost.id]);

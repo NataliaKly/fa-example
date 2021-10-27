@@ -95,6 +95,7 @@ export class CostsController {
 
     res.status(HttpStatus.OK).send({
       month: date.format("MMMM"),
+      year: date.format("YYYY"),
       days: days
     });
   }

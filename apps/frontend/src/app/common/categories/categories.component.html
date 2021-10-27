@@ -12,6 +12,9 @@
                         <mat-error *ngIf="control.controls.title.hasError('required')">
                             Title is <strong>required</strong>
                         </mat-error>
+                        <mat-error *ngIf="control.controls.title.hasError('notUnique')">
+                            Title is <strong>not unique</strong>
+                        </mat-error>
                     </mat-form-field>
                 </ng-container>
             </div>
@@ -26,7 +29,15 @@
             >
                 Add Control
             </button>
-            <button mat-flat-button color="primary" class="fa-categories__form-button" (click)="save()">Save</button>
+            <button
+                mat-flat-button
+                color="primary"
+                class="fa-categories__form-button"
+                [disabled]="formGroup.invalid"
+                (click)="save()"
+            >
+                Save
+            </button>
         </div>
     </ng-container>
 </div>

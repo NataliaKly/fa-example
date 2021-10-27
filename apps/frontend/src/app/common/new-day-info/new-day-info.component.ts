@@ -13,6 +13,7 @@ import { CostDto } from "@fa-example/models/cost.dto";
 })
 export class NewDayInfoComponent implements OnInit {
   public month: string = "";
+  public year: string = "";
   public day: string = "";
   public date: moment.Moment = moment();
   public formGroup: FormGroup;
@@ -41,8 +42,9 @@ export class NewDayInfoComponent implements OnInit {
     this.loading = true;
     this.route.params.subscribe(params => {
       this.month = params?.month;
+      this.year = params.year;
       this.day = params?.day;
-      this.date = moment(this.month + "-" + this.day, "MMMM-D");
+      this.date = moment(this.year + "-" + this.month + "-" + this.day, "YYYY-MMMM-D");
 
       this.costsService.getCategories().subscribe((categories: CategoryDto[]) => {
         this.categories = categories;
@@ -55,7 +57,7 @@ export class NewDayInfoComponent implements OnInit {
 
   public save(): void {
     this.costsService.saveCosts(this.formArray.value).subscribe(() => {
-      this.router.navigate(["/", this.month, this.day]);
+      this.router.navigate(["/", this.year, this.month, this.day]);
     });
   }
 
@@ -71,6 +73,6 @@ export class NewDayInfoComponent implements OnInit {
   }
 
   public backToCalendar(): void {
-    this.router.navigate(["/", this.month]);
+    this.router.navigate(["/", this.year, this.month]);
   }
 }

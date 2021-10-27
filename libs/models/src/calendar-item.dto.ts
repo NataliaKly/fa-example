@@ -7,5 +7,6 @@ export interface CalendarItemDto {
 
 export interface CalendarDto {
   month: string;
+  year: string;
   days: CalendarItemDto[];
 }

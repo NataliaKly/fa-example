@@ -5,6 +5,7 @@ import { CategoryDto } from "@fa-example/models/category.dto";
 import { CostsService } from "../../service/costs.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { categoryUniqueTitleValidator } from "../../service/validation/categories-validation.service";
 
 @Component({
   selector: "fa-categories",
@@ -47,11 +48,11 @@ export class CategoriesComponent implements OnInit {
       this.formBuilder.group(
         category?.id
           ? {
-              title: [category?.title ?? "", [Validators.required]],
+              title: [category?.title ?? "", [Validators.required, categoryUniqueTitleValidator(this.formGroup)]],
               id: [category?.id ?? ""]
             }
           : {
-              title: ["", [Validators.required]]
+              title: ["", [Validators.required, categoryUniqueTitleValidator(this.formGroup)]]
             }
       )
     );
