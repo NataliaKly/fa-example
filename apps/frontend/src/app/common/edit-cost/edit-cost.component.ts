@@ -9,6 +9,7 @@ import { switchMap, tap } from "rxjs/operators";
 import { MatSelectChange } from "@angular/material/select";
 import { ViewModeEnum } from "../../enums/view-mode.enum";
 import { ActionEnum } from "../../enums/action.enum";
+import { of } from "rxjs";
 
 @Component({
   selector: "fa-edit-cost",

@@ -14,6 +14,13 @@
                 >
             </button>
         </ng-container>
+        <ng-container *ngSwitchCase="viewMode.NEW_DAY">
+            <button mat-icon-button color="primary" aria-label="Calendar">
+                <mat-icon [ngClass]="'fa-action-panel__icon'" (click)="actionClick.emit(actions.CALENDAR)"
+                    >calendar_today</mat-icon
+                >
+            </button>
+        </ng-container>
         <ng-container *ngSwitchCase="viewMode.CATEGORIES">
             <button mat-icon-button color="primary" aria-label="Calendar">
                 <mat-icon [ngClass]="'fa-action-panel__icon'" (click)="actionClick.emit(actions.CALENDAR)"
@@ -28,17 +35,34 @@
                 >
             </button>
 
-            <button
-                *ngIf="!controlsHidden"
-                class="fa-action-panel__edit"
-                mat-icon-button
-                color="primary"
-                aria-label="Edit"
-            >
-                <mat-icon [ngClass]="'fa-action-panel__icon'" (click)="actionClick.emit(actions.EDIT)"
-                    >edit_note</mat-icon
+            <div class="fa-action-panel__edit">
+                <button
+                    *ngIf="!controlsHidden"
+                    mat-icon-button
+                    color="primary"
+                    aria-label="Edit"
+                    class="fa-action-panel__button"
                 >
-            </button>
+                    <mat-icon [ngClass]="'fa-action-panel__icon'" (click)="actionClick.emit(actions.REMOVE)"
+                        >delete</mat-icon
+                    >
+                </button>
+                <button
+                    *ngIf="!controlsHidden"
+                    mat-icon-button
+                    color="primary"
+                    aria-label="Edit"
+                    class="fa-action-panel__button"
+                >
+                    <mat-icon [ngClass]="'fa-action-panel__icon'" (click)="actionClick.emit(actions.EDIT)"
+                        >edit_note</mat-icon
+                    >
+                </button>
+
+                <button mat-icon-button color="primary" aria-label="Add info">
+                    <mat-icon [ngClass]="'fa-action-panel__icon'" (click)="actionClick.emit(actions.ADD)">add</mat-icon>
+                </button>
+            </div>
         </ng-container>
     </ng-container>
 </div>

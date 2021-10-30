@@ -75,10 +75,12 @@ export class CalendarComponent implements OnInit {
         this.router.navigate(["/categories"]);
         break;
       case this.actions.BACK:
-        this.router.navigate(["/", this.year, moment(this.date).subtract(1, "M").format("MMMM")]);
+        const prevMoment = moment(this.date).subtract(1, "M");
+        this.router.navigate(["/", prevMoment.format("YYYY"), prevMoment.format("MMMM")]);
         break;
       case this.actions.NEXT:
-        this.router.navigate(["/", this.year, moment(this.date).add(1, "M").format("MMMM")]);
+        const nextMoment = moment(this.date).add(1, "M");
+        this.router.navigate(["/", nextMoment.format("YYYY"), nextMoment.format("MMMM")]);
         break;
     }
   }

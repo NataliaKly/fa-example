@@ -8,6 +8,7 @@ import { CategoriesComponent } from "./common/categories/categories.component";
 
 const routes: Routes = [
   { path: "categories", component: CategoriesComponent },
+  { path: "cost/new", component: EditCostComponent },
   { path: "cost/:id", component: EditCostComponent },
   { path: ":year/:month", component: CalendarComponent },
   { path: ":year/:month/:day", component: DayInfoComponent },

@@ -2,7 +2,6 @@
 
 .fa-day-info {
     &__container {
-        margin: 0 10px;
         text-align: center;
     }
 
@@ -50,6 +49,7 @@
         display: flex;
         justify-content: space-between;
         margin: 32px 0 16px 0;
+        padding: 0 10px;
         font-size: 24px;
         color: @color-violet-middle;
     }
@@ -59,10 +59,10 @@
         justify-content: space-between;
         line-height: 24px;
         cursor: pointer;
-        padding: 8px 0;
+        padding: 8px 10px;
 
         &:hover {
-            background-color: @color-violet-bg-light;
+            background-color: @color-violet-bg-middle;
         }
 
         &-amount {
@@ -74,7 +74,7 @@
         }
 
         &._selected {
-            background-color: @color-violet-light;
+            background-color: @color-violet-bg-light;
         }
     }
 

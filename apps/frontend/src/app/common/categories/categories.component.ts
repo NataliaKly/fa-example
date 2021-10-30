@@ -4,7 +4,7 @@ import { ActionEnum } from "../../enums/action.enum";
 import { CategoryDto } from "@fa-example/models/category.dto";
 import { CostsService } from "../../service/costs.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { categoryUniqueTitleValidator } from "../../service/validation/categories-validation.service";
 
 @Component({
@@ -70,5 +70,21 @@ export class CategoriesComponent implements OnInit {
         this.router.navigate(["/"]);
         break;
     }
+  }
+
+  public removeCategory(control: AbstractControl): void {
+    if (control.value.id) {
+      this.calendarService.removeCategory(control.value.id).subscribe(() => this.removeControl(control));
+    } else {
+      this.removeControl(control);
+    }
+  }
+
+  private removeControl(control: AbstractControl): void {
+    (this.formGroup.get("items") as FormArray).controls.splice(
+      (this.formGroup.get("items") as FormArray).controls.indexOf(control),
+      1
+    );
+    (this.formGroup.get("items") as FormArray).updateValueAndValidity();
   }
 }

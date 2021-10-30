@@ -5,7 +5,7 @@
     <ng-container *ngIf="!loading">
         <div *ngIf="formArray.value.length" class="fa-categories__form" formArrayName="items">
             <div *ngFor="let control of formArray.controls; let i = index" class="fa-categories__form-row">
-                <ng-container [formGroupName]="i">
+                <div [formGroupName]="i" class="fa-categories__form-line">
                     <mat-form-field class="fa-categories__form-item" appearance="outline" floatLabel="always">
                         <mat-label>Title</mat-label>
                         <input type="text" matInput [formControlName]="'title'" placeholder="Title" />
@@ -16,7 +16,12 @@
                             Title is <strong>not unique</strong>
                         </mat-error>
                     </mat-form-field>
-                </ng-container>
+                    <button mat-icon-button color="primary" aria-label="Calendar" class="fa-categories__remove">
+                        <mat-icon [ngClass]="'fa-action-panel__icon'" (click)="removeCategory(control)"
+                            >delete</mat-icon
+                        >
+                    </button>
+                </div>
             </div>
         </div>
         <div class="fa-categories__form-controls">

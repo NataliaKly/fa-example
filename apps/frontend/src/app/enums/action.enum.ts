@@ -3,6 +3,7 @@ export enum ActionEnum {
   BACK = "BACK",
   NEXT = "NEXT",
   REMOVE = "REMOVE",
+  ADD = "ADD",
   CALENDAR = "CALENDAR",
   CATEGORY = "CATEGORY"
 }

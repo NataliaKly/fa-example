@@ -1,4 +1,4 @@
-<fa-title [title]="dateString" [icon]="'calendar_today'" (iconClick)="backToCalendar()"></fa-title>
+<fa-title [title]="dateString" [icon]="'calendar_today'"></fa-title>
 <div class="fa-day-info__container">
     <mat-spinner *ngIf="loading" [ngClass]="'fa-loader'" [diameter]="60"></mat-spinner>
     <ng-container *ngIf="!loading">
@@ -51,3 +51,4 @@
         </div>
     </ng-container>
 </div>
+<fa-action-panel [mode]="mode" (actionClick)="doAction($event)"></fa-action-panel>

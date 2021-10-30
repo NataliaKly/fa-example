@@ -5,6 +5,8 @@ import { CostsService } from "../../service/costs.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import moment from "moment";
 import { CostDto } from "@fa-example/models/cost.dto";
+import { ViewModeEnum } from "../../enums/view-mode.enum";
+import { ActionEnum } from "../../enums/action.enum";
 
 @Component({
   selector: "fa-new-day-info",
@@ -27,6 +29,9 @@ export class NewDayInfoComponent implements OnInit {
   public get formArray(): FormArray {
     return this.formGroup.get("items") as FormArray;
   }
+
+  public readonly mode = ViewModeEnum.NEW_DAY;
+  public readonly actions: typeof ActionEnum = ActionEnum;
 
   constructor(
     public costsService: CostsService,
@@ -74,5 +79,13 @@ export class NewDayInfoComponent implements OnInit {
 
   public backToCalendar(): void {
     this.router.navigate(["/", this.year, this.month]);
+  }
+
+  public doAction(action: string): void {
+    switch (action) {
+      case this.actions.CALENDAR:
+        this.router.navigate(["/", this.year, this.month]);
+        break;
+    }
   }
 }

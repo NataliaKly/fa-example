@@ -24,7 +24,6 @@ export class DayInfoComponent implements OnInit {
   public day: string = "";
   public date: moment.Moment = moment();
   public loading: boolean = false;
-  public formGroup: FormGroup;
   public categories: CategoryDto[] = [];
   public selectedCost: CostDto;
 
@@ -35,28 +34,16 @@ export class DayInfoComponent implements OnInit {
   public readonly mode = ViewModeEnum.DAY;
   public readonly actions: typeof ActionEnum = ActionEnum;
 
-  constructor(
-    public calendarService: CostsService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(public calendarService: CostsService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.loading = true;
-    this.formGroup = this.formBuilder.group({
-      items: this.formBuilder.array([])
-    });
     this.route.params.subscribe(params => {
       this.month = params?.month;
       this.year = params.year;
       this.day = params?.day;
       this.date = moment(this.year + "-" + this.month + "-" + this.day, "YYYY-MMMM-D");
-      this.calendarService.getDayInfo(this.date.format("MM-DD-YYYY")).subscribe((costs: CostDto[]) => {
-        this.loading = false;
-        this.costs = costs;
-        this.groupedCosts = this.groupByCategory();
-      });
+      this.loadList();
     });
     this.calendarService.getCategories().subscribe((categories: CategoryDto[]) => {
       this.categories = categories;
@@ -103,6 +90,28 @@ export class DayInfoComponent implements OnInit {
       case this.actions.EDIT:
         this.router.navigate(["/cost", this.selectedCost.id]);
         break;
+      case this.actions.ADD:
+        this.router.navigate(["/", this.year, this.month, this.day, "add-info"]);
+        break;
+      case this.actions.REMOVE:
+        this.removeCost();
+        break;
     }
+  }
+
+  private loadList(): void {
+    this.calendarService.getDayInfo(this.date.format("MM-DD-YYYY")).subscribe((costs: CostDto[]) => {
+      this.loading = false;
+      this.costs = costs;
+      this.groupedCosts = this.groupByCategory();
+    });
+  }
+
+  private removeCost(): void {
+    this.calendarService.removeCost(this.selectedCost.id).subscribe(() => {
+      this.selectedCost = null;
+      this.loading = true;
+      this.loadList();
+    });
   }
 }

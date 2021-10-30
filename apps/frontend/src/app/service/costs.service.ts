@@ -33,6 +33,14 @@ export class CostsService {
     return this.http.post<CategoryDto[]>("/api/categories", categories);
   }
 
+  public removeCategory(id: string): Observable<void> {
+    return this.http.delete<void>("/api/categories/" + id);
+  }
+
+  public removeCost(id: string): Observable<void> {
+    return this.http.delete<void>("/api/costs/" + id);
+  }
+
   public saveCosts(costs: CostDto[]): Observable<CostDto[]> {
     return this.http.post<CostDto[]>("/api/costs", costs);
   }
