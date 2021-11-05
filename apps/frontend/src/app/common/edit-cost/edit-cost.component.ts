@@ -10,6 +10,7 @@ import { MatSelectChange } from "@angular/material/select";
 import { ViewModeEnum } from "../../enums/view-mode.enum";
 import { ActionEnum } from "../../enums/action.enum";
 import { of } from "rxjs";
+import { NavigationService } from "../../service/navigation.service";
 
 @Component({
   selector: "fa-edit-cost",
@@ -32,6 +33,7 @@ export class EditCostComponent implements OnInit {
     public costsService: CostsService,
     private route: ActivatedRoute,
     private router: Router,
+    private navigationService: NavigationService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -77,16 +79,14 @@ export class EditCostComponent implements OnInit {
         category: category
       })
       .subscribe(() => {
-        const momentDate = moment(this.formGroup.value.date);
-        this.router.navigate(["/", momentDate.format("YYYY"), momentDate.format("MMMM"), momentDate.format("D")]);
+        this.navigationService.goToDay(moment(this.formGroup.value.date));
       });
   }
 
   public doAction(action: string): void {
     switch (action) {
       case this.actions.CALENDAR:
-        const momentDate = moment(this.formGroup.value.date);
-        this.router.navigate(["/", momentDate.format("YYYY"), momentDate.format("MMMM")]);
+        this.navigationService.goToMonth(moment(this.formGroup.value.date));
         break;
     }
   }

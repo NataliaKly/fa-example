@@ -30,7 +30,15 @@
                                     {{ category.title }}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="control.controls.category.hasError('required')">
+                                Category is <strong>required</strong>
+                            </mat-error>
                         </mat-form-field>
+                        <button mat-icon-button color="primary" aria-label="Calendar" class="fa-categories__remove">
+                            <mat-icon [ngClass]="'fa-action-panel__icon'" (click)="removeControl(control)"
+                                >delete</mat-icon
+                            >
+                        </button>
                     </ng-container>
                 </div>
             </div>
@@ -43,7 +51,7 @@
                 mat-flat-button
                 color="primary"
                 class="fa-day-info__form-button"
-                [disabled]="formGroup.invalid"
+                [disabled]="formGroup.invalid || !formArray.controls.length"
                 (click)="save()"
             >
                 Save

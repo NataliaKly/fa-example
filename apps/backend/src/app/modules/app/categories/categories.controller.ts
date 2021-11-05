@@ -28,20 +28,20 @@ export class CategoriesController {
   }
 
   @Patch(":id")
-  async updateEvent(@Body() body: { event: CategoryDto }): Promise<CategoryDto> {
-    const event = await this.categoryRepository.save({
-      id: body.event.id,
-      title: body.event.title
+  async updateCategory(@Body() body: { category: CategoryDto }): Promise<CategoryDto> {
+    const category = await this.categoryRepository.save({
+      id: body.category.id,
+      title: body.category.title
     });
 
     return {
-      id: event.id,
-      title: event.title
+      id: category.id,
+      title: category.title
     };
   }
 
   @Delete(":id")
-  async deleteEvent(@Param() params, @Res() res: Response): Promise<void> {
+  async deleteCategory(@Param() params, @Res() res: Response): Promise<void> {
     await this.categoryRepository.delete(params.id);
     res.status(HttpStatus.OK).send();
   }

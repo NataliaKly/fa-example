@@ -3,10 +3,10 @@ import { CostsService } from "../../service/costs.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import moment from "moment";
 import { CostDto } from "@fa-example/models/cost.dto";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CategoryDto } from "@fa-example/models/category.dto";
 import { ViewModeEnum } from "../../enums/view-mode.enum";
 import { ActionEnum } from "../../enums/action.enum";
+import { NavigationService } from "../../service/navigation.service";
 
 @Component({
   selector: "fa-day-info",
@@ -34,7 +34,12 @@ export class DayInfoComponent implements OnInit {
   public readonly mode = ViewModeEnum.DAY;
   public readonly actions: typeof ActionEnum = ActionEnum;
 
-  constructor(public calendarService: CostsService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    public calendarService: CostsService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private navigationService: NavigationService
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -85,7 +90,7 @@ export class DayInfoComponent implements OnInit {
   public doAction(action: string): void {
     switch (action) {
       case this.actions.CALENDAR:
-        this.router.navigate(["/", this.year, this.month]);
+        this.navigationService.goToMonth(this.date);
         break;
       case this.actions.EDIT:
         this.router.navigate(["/cost", this.selectedCost.id]);

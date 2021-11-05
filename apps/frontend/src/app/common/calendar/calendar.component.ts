@@ -5,6 +5,7 @@ import { CalendarDto, CalendarItemDto } from "@fa-example/models/calendar-item.d
 import { ActivatedRoute, Router } from "@angular/router";
 import { ViewModeEnum } from "../../enums/view-mode.enum";
 import { ActionEnum } from "../../enums/action.enum";
+import { NavigationService } from "../../service/navigation.service";
 
 @Component({
   selector: "fa-calendar",
@@ -30,7 +31,12 @@ export class CalendarComponent implements OnInit {
     return this.year + "-" + this.month + "-" + day === currentMoment.format("YYYY-MMMM-D");
   }
 
-  constructor(public calendarService: CostsService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    public calendarService: CostsService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private navigationService: NavigationService
+  ) {}
 
   public ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -66,7 +72,7 @@ export class CalendarComponent implements OnInit {
 
   public selectDate(date: Date): void {
     const momentDate: moment.Moment = moment(date);
-    this.router.navigate(["/", momentDate.format("YYYY"), momentDate.format("MMMM")]);
+    this.navigationService.goToMonth(momentDate);
   }
 
   public doAction(action: string): void {
@@ -75,12 +81,10 @@ export class CalendarComponent implements OnInit {
         this.router.navigate(["/categories"]);
         break;
       case this.actions.BACK:
-        const prevMoment = moment(this.date).subtract(1, "M");
-        this.router.navigate(["/", prevMoment.format("YYYY"), prevMoment.format("MMMM")]);
+        this.navigationService.goToMonth(moment(this.date).subtract(1, "M"));
         break;
       case this.actions.NEXT:
-        const nextMoment = moment(this.date).add(1, "M");
-        this.router.navigate(["/", nextMoment.format("YYYY"), nextMoment.format("MMMM")]);
+        this.navigationService.goToMonth(moment(this.date).add(1, "M"));
         break;
     }
   }

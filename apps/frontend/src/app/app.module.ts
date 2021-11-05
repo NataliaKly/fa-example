@@ -7,7 +7,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatInputModule } from "@angular/material/input";
-import { CostsService } from './service/costs.service';
+import { CostsService } from "./service/costs.service";
+import { NavigationService } from "./service/navigation.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { CostsService } from './service/costs.service';
     BrowserAnimationsModule,
     MatInputModule
   ],
-  providers: [CostsService],
+  providers: [CostsService, NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

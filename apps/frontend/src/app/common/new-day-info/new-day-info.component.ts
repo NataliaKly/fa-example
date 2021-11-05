@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CategoryDto } from "@fa-example/models/category.dto";
 import { CostsService } from "../../service/costs.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -87,5 +87,13 @@ export class NewDayInfoComponent implements OnInit {
         this.router.navigate(["/", this.year, this.month]);
         break;
     }
+  }
+
+  private removeControl(control: AbstractControl): void {
+    (this.formGroup.get("items") as FormArray).controls.splice(
+      (this.formGroup.get("items") as FormArray).controls.indexOf(control),
+      1
+    );
+    (this.formGroup.get("items") as FormArray).updateValueAndValidity();
   }
 }
